@@ -8,8 +8,6 @@ import {
   db,
 } from "../../firebase/index";
 
-const auth = getAuth();
-
 // icons
 import { BsArrowRight } from "react-icons/bs";
 

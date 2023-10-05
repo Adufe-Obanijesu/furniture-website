@@ -1,9 +1,32 @@
+import { useState, useEffect, useContext } from "react";
+
+// context
+import { CartContext } from "../../contexts/cartContext";
+
 // icons
 import { FaPlus, FaMinus } from "react-icons/fa6";
+import { FaTimes } from "react-icons/fa";
 
 const Order = ({ image, productName, price, qty }) => {
+
+  const { cart, dispatch } = useContext(CartContext);
+
+  const deleteOrder = () => {
+    let cart = JSON.parse(localStorage.getItem("furnitureCart"));
+
+    let newCart = cart.filter(item => item.name !== productName);
+    localStorage.setItem("furnitureCart", JSON.stringify(newCart));
+
+    dispatch({ type: "REMOVE", payload: productName})
+  }
+
 	return (
 		<tr className="hover:bg-gray-100">
+      <td className="px-2 py-4">
+        <div className="h-full w-full hv-center">
+          <FaTimes className="inline text-red-400 cursor-pointer" onClick={deleteOrder} />
+        </div>
+      </td>
       <td className="px-6 py-4">
         <div className="">
           <img src={image} alt="product" className="object-cover w-24 h-24" />

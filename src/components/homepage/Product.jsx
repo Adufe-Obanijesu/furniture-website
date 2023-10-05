@@ -1,9 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+
+// context
+import { CartContext } from "../../contexts/cartContext";
 
 // icons
 import { FaPlus, FaMinus } from "react-icons/fa6";
 
 const Product = ({ name, price, image, quantity }) => {
+
+	const { cart, dispatch } = useContext(CartContext);
 
 	const [ loading, setLoading ]	= useState(false);
 	const [ qty, setQty ] = useState(0);
@@ -42,8 +47,8 @@ const Product = ({ name, price, image, quantity }) => {
 		if (isAdded) {
 			let newCart = cart.filter(item => item.name !== name);
 			localStorage.setItem("furnitureCart", JSON.stringify(newCart));
+			dispatch({ type: "REMOVE", payload: name})
 			setIsAdded(false);
-			console.log(JSON.parse(localStorage.getItem("furnitureCart")));
 			return;
 		}
 
@@ -65,8 +70,10 @@ const Product = ({ name, price, image, quantity }) => {
 			qty,
 		}]
 		localStorage.setItem("furnitureCart", JSON.stringify(cart));
+		dispatch({ type: "ADD", payload: {
+			name, price, image, qty,
+		}});
 		setIsAdded(true);
-		console.log(JSON.parse(localStorage.getItem("furnitureCart")));
 	}
 
 	return (

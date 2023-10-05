@@ -1,21 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+
+// context
+import { CartContext } from "../../contexts/cartContext";
 
 const Total = () => {
+
+	const { cart, dispatch } = useContext(CartContext);
 
 	const [ total, setTotal ] = useState(0);
 
 	useEffect(() => {
-    if (!localStorage.getItem("furnitureCart")) return;
+    if (cart.length === 0) {
+    	setTotal(0);
+    	return;
+    }
 
-    let totalPrice = JSON.parse(localStorage.getItem("furnitureCart")).reduce((total, item) => {
+    let totalPrice = cart.reduce((total, item) => {
     		total += item.price * item.qty;
     		return total;
     	}, 0);
     setTotal(totalPrice)
-  }, []);
+  }, [cart]);
 
 	return (
-		<div className="py-12">
+		<div className="pb-12">
 		
 		<div className="">
 			<h1 className="text-5xl font-medium uppercase tracking-wide pb-6 py-12">cart totals</h1>
@@ -28,7 +37,7 @@ const Total = () => {
               subtotal
             </th>
             <th scope="col" className="text-lg font-medium py-3 px-6 tracking-wider text-left text-gray-700 uppercase">
-              <div className="flex justify-end">$717.78</div>
+              <div className="flex justify-end">${total}</div>
             </th>
           </tr>
         </thead>
@@ -61,7 +70,9 @@ const Total = () => {
         </tbody>
       </table>
 
-      <button className="blackButton mt-6">proceed to checkout</button>
+      <Link to="/checkout">
+      	<button className="blackButton mt-6">proceed to checkout</button>
+      </Link>
     </div>
 	)
 }

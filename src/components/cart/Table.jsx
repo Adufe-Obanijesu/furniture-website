@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+
+// context
+import { CartContext } from "../../contexts/cartContext";
 
 // components
 import Order from "./Order";
 
 const Table = () => {
 
-  const [ orders, setOrders ] = useState([]);
-
-  useEffect(() => {
-    if (!localStorage.getItem("furnitureCart")) return;
-
-    setOrders(JSON.parse(localStorage.getItem("furnitureCart")));
-  }, []);
+  const { cart, dispatch } = useContext(CartContext);
 
 	return (
 		<div className="py-12">
 			<table className="min-w-full divide-y divide-gray-200 table-fixed border border-gray-200">
         <thead className="">
           <tr>
-          	<th scope="col" className="p-4">
+          	<th scope="col" className="py-4 px-2">
+            
+            </th>
+            <th scope="col" className="p-4">
             
             </th>
             <th scope="col" className="py-3 px-6 font-medium tracking-wider text-left text-gray-700 uppercase">
@@ -38,7 +38,7 @@ const Table = () => {
         <tbody className="bg-white divide-y divide-gray-200">
           
           {
-            orders.length > 0 && orders.map(order => <Order key={order.name} image={order.image} productName={order.name} price={order.price} qty={order.qty} />)
+            cart.length > 0 && cart.map(order => <Order key={order.name} image={order.image} productName={order.name} price={order.price} qty={order.qty} />)
           }
           
         </tbody>

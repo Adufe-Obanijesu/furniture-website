@@ -1,3 +1,4 @@
+// components
 import Table from "../components/cart/Table";
 import Total from "../components/cart/Total";
 
