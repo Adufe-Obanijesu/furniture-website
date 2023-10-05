@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "jost";
+    src: url("/fonts/jost.ttf");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+p, li, button, h1, h2, h3, h4, h5, h6 {
+    @apply font-jost;
+}
+
+.dheading {
+    @apply text-3xl font-bold uppercase mb-6 text-center;
+}
+
+.h-center {
+    @apply flex justify-center;
+}
+
+.v-center {
+    @apply flex items-center;
+}
+
+.hv-center {
+    @apply flex justify-center items-center;
+}
+
+button {
+    @apply transition duration-300 ease-in cursor-pointer;
+}
+
+.heading {
+    @apply text-2xl uppercase text-gray-700 font-bold;
+}
+
+.smallHeading {
+    @apply text-sm uppercase text-gray-400 font-medium;
+}
+
+.transitionItem {
+    @apply transition duration-300 ease-in;
+}
+
+footer li {
+    @apply capitalize cursor-pointer font-medium hover:text-black hover:font-bold transitionItem;
+}
+
+nav li {
+    @apply cursor-pointer hover:text-gray-500;
+}
+
+.borderButton {
+    @apply rounded-full border border-gray-700 text-gray-700 hover:text-white hover:bg-gray-700 py-1 px-4 uppercase flex v-center;
+}
+
+.blackButton {
+    @apply py-2 px-4 uppercase border-2 border-black text-gray-200 bg-black hover:bg-transparent hover:text-black;
+}
+
+input[type=radio] {
+    @apply cursor-pointer;
+}
+
+.activeCat {
+    @apply text-gray-600 font-bold;
+}
