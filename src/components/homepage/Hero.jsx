@@ -2,10 +2,10 @@ const Hero = () => {
 	return (
 		<header className="py-12">
 
-			<div className="grid grid-cols-2 gap-4">
+			<div className="grid lg:grid-cols-2 gap-4">
 				
 				<div className="relative">
-					<img src="/images/hero/hero1.jpg" className="h-full object-cover" alt="chair" />
+					<img src="/images/hero/hero1.jpg" className="lg:h-full h-80 w-full object-cover" alt="chair" />
 					<div className="absolute top-0 left-0 p-8">
 						<h5 className="text-xl font-semibold uppercase">chairs & stools</h5>
 						<p className="text-gray-700 mt-1">

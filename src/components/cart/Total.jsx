@@ -27,10 +27,10 @@ const Total = () => {
 		<div className="pb-12">
 		
 		<div className="">
-			<h1 className="text-5xl font-medium uppercase tracking-wide pb-6 py-12">cart totals</h1>
+			<h1 className="text-3xl font-medium uppercase tracking-wide pb-6 py-12">cart totals</h1>
 		</div>
 
-			<table className="divide-y divide-gray-200 table-fixed w-1/2 border border-gray-200">
+			<table className="divide-y divide-gray-200 table-fixed md:w-1/2 w-full border border-gray-200">
         <thead className="">
           <tr>
             <th scope="col" className="text-lg font-medium py-3 px-6 tracking-wider text-left text-gray-700 uppercase">

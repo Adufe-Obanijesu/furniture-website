@@ -1,12 +1,8 @@
-import { useLocation } from "react-router-dom";
-
 const Footer = () => {
 
-	const { pathname } = useLocation();
-
 	return (
-		<footer className={`mt-32 mx-32 py-12 border-t-2 broder-gray-700 ${pathname.includes("admin") ? "hidden" : "block"}`}>
-			<div className="grid grid-cols-4 text-gray-700">
+		<footer className="lg:mt-32 mt-12 lg:px-32 md:px-12 px-6 py-12 border-t-2">
+			<div className="grid md:grid-cols-4 grid-cols-2 gap-4 md:gap-0 text-gray-700">
 				<div>
 					<h4 className="text-lg uppercase font-semibold">company</h4>
 					<ul className="mt-6 flex flex-col gap-3">
@@ -50,10 +46,10 @@ const Footer = () => {
 
 			</div>
 
-			<div className="flex justify-between items-end text-sm mt-12">
+			<div className="flex flex-wrap md:gap-4 gap-2 justify-between items-end text-sm mt-12">
 				<div>
-					<h1 className="inline text-4xl font-medium text-center uppercase tracking-wide pb-6">furniture</h1>
-					<p className="font-medium capitalize ml-2 inline">
+					<h1 className="md:inline text-4xl font-medium text-center uppercase tracking-wide pb-6">furniture</h1>
+					<p className="font-medium capitalize md:ml-2 inline">
 						&copy; furniture Co. all rights reserved.
 					</p>
 				</div>

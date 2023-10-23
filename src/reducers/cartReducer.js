@@ -13,6 +13,9 @@ const cartReducer = (state, action) => {
 		case "REMOVE":
 			let filteredCart = state.filter(item => item.name != action.payload);
 			return filteredCart;
+		case "CLEAR":
+			localStorage.removeItem("furnitureCart");
+			return [];
 
 		default: return state;
 	}

@@ -4,10 +4,6 @@ import { useState } from "react";
 import {
   collection,
   db,
-  onSnapshot,
-  query,
-  where,
-  orderBy,
   getAuth,
   getStorage,
   ref,
@@ -108,7 +104,7 @@ const ProductModal = ({ modal, setModal, queryValue }) => {
         className="h-screen w-full absolute z-50 bg-black bg-opacity-50 cursor-pointer"
         onClick={() => setModal(false)}
       ></div>
-      <div className="bg-white rounded shadow-lg w-2/5 p-3 z-50">
+      <div className="bg-white rounded shadow-lg lg:w-2/5 md:w-3/5 p-3 z-50">
         <div className="border-b border-1 border-gray-200 py-2 mb-2">
           <h3 className="text-xl font-bold tracking-md">Add a Product</h3>
         </div>

@@ -66,7 +66,7 @@ const Newsletter = () => {
 
 	return (
 		<section className="py-12 h-center">
-			<div className="w-3/5">
+			<div className="lg:w-3/5 md:w-4/5 w-full">
 				<h4 className="text-2xl font-bold text-gray-700 text-center">
 					Subscribe to our newsletter and receive the latest product news, stories, invitations to exclusive design events and much, much more.
 				</h4>

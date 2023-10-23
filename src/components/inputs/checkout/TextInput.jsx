@@ -1,4 +1,4 @@
-const TextInput = ({ name, label, optional }) => {
+const TextInput = ({ name, label, optional, input, setInput }) => {
 	return (
 		<div className="mb-4">
       <label className="font-bold px-3 text-gray-600 text-sm">
@@ -10,9 +10,9 @@ const TextInput = ({ name, label, optional }) => {
       <input
         type="text"
         className="p-3 text-gray-500 rounded w-full border border-gray-700 text-lg focus:outline-none"
-        // value={input}
+        value={input}
         name={name}
-        // onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => setInput(e.target.value)}
         required
       />
     </div>

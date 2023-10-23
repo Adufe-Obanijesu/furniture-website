@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // firebase
 import {
@@ -72,14 +72,14 @@ const Login = () => {
 	}
 
 	return (
-		<main className="py-12 px-32">
+		<main className="py-12 lg:px-32 md:px-12 px-6">
 
 			<div className="">
 				<h1 className="text-3xl font-semibold text-center uppercase tracking-wide pb-6">Log in</h1>
 			</div>
 
 			<div className="h-center">
-				<div className="w-1/2">
+				<div className="lg:w-1/2 md:w-2/3">
 						<form onSubmit={loginWithEP}>
 							<EmailInput name="Email" label="Email" input={email} setInput={setEmail} />
 							<PasswordInput name="password" label="Password" input={password} setInput={setPassword} />
@@ -108,6 +108,13 @@ const Login = () => {
 							</div>
 							log in with google
 						</button>
+						<div className="flex justify-end mt-2">
+							<p>
+								<span>Not a user?</span>
+								{" "}
+								<Link to="/signup" className="text-blue-500">Sign up</Link>
+							</p>
+						</div>
 				</div>
 			</div>
 		</main>

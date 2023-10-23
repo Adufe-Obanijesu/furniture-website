@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 
 // firebase
 import {
@@ -13,59 +14,101 @@ import Product from "../components/homepage/Product";
 import Blog from "../components/homepage/Blog";
 import Newsletter from "../components/homepage/Newsletter";
 
+// contexts
+import { CartContext } from "../contexts/cartContext";
+
+// icons
+import { BsHandbag } from "react-icons/bs";
+
 const Homepage = () => {
+
+	const { cart } = useContext(CartContext);
+
+	const [ total, setTotal ] = useState(0);
+	const [ loading, setLoading ] = useState(false);
+
+  const [scrollPosition, setScrollPosition] = useState(0);
+  
+  const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+  };
+
+  useEffect(() => {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      return () => {
+          window.removeEventListener('scroll', handleScroll);
+      };
+  }, []);
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      setTotal(0);
+      return;
+    }
+
+    let totalPrice = cart.reduce((total, item) => {
+        total += item.price * item.qty;
+        return total;
+      }, 0);
+    setTotal(totalPrice)
+  }, [cart]);
 
 	const [ products, setProducts ] = useState([]);
 	const [ showProducts, setShowProducts ] = useState([]);
 	const [ categories, setCategories ] = useState([]);
 	const [ filter, setFilter ] = useState("");
 
-  const colRef = collection(db, "products");
-  const catRef = collection(db, "category");
-
+	
   useEffect(() => {
+	const colRef = collection(db, "products");
+
     const unsub = () => {
-    	onSnapshot(colRef, (snapshot) => {
-	      let arr = [];
-	      snapshot.docs.forEach((doc) => {
-	        arr.push({ ...doc.data(), id: doc.id });
-	      })
+		onSnapshot(colRef, (snapshot) => {
+			let arr = [];
+			snapshot.docs.forEach((doc) => {
+			arr.push({ ...doc.data(), id: doc.id });
+			})
 
-	      setProducts(arr);
-	      setShowProducts(arr);
+			setProducts(arr);
+			setShowProducts(arr);
 
-	    })
+		})
     }
     return () => unsub();
   }, []);
 
   useEffect(() => {
-  	const unsub =  () => {
-  		onSnapshot(catRef, (snapshot) => {
-	      let arr = [];
-	      snapshot.docs.forEach((doc) => {
-	        arr.push({ ...doc.data(), id: doc.id });
-	      })
+	const catRef = collection(db, "category");
 
-	      setCategories(arr);
+	setLoading(true);
+	const unsub =  () => {
+		onSnapshot(catRef, (snapshot) => {
+			let arr = [];
+			snapshot.docs.forEach((doc) => {
+			arr.push({ ...doc.data(), id: doc.id });
+			})
 
-	    })
-  	}
+			setCategories(arr);
+			setLoading(false);
+		})
+	}
 
-  	return () => unsub();
+	return () => unsub();
   }, []);
 
   useEffect(() => {
-  	if (filter) {
-  		const filteredProducts = products.filter(product => product.category === filter);
-  		setShowProducts(filteredProducts)
-  	} else {
-  		setShowProducts(products);
-  	}
-  }, [filter]);
+	if (filter) {
+		const filteredProducts = products.filter(product => product.category === filter);
+		setShowProducts(filteredProducts)
+	} else {
+		setShowProducts(products);
+	}
+  }, [filter, products]);
 
 	return (
-		<main className="px-32">
+		<main className="lg:px-32 md:px-12 px-6">
 
 			<Hero />
 
@@ -82,13 +125,13 @@ const Homepage = () => {
 						<span className={`mr-8 uppercase transitionItem hover:text-gray-600 text-sm cursor-pointer ${!filter ? "activeCat" : "text-gray-400"}`} onClick={() => setFilter("")}>All</span>
 
 						{
-							categories && categories.map(category => <span key={category.category} className={`mr-8 uppercase transitionItem hover:text-gray-600 text-sm cursor-pointer ${filter === category.category ? "activeCat" : "text-gray-400"}`} onClick={() => setFilter(category.category)}>{category.category}</span>)
+							categories.length === 0 && !loading ? <h3 className="font-semibold text-center text-lg text-gray-700"></h3> : categories && categories.map(category => <span key={category.category} className={`mr-8 uppercase transitionItem hover:text-gray-600 text-sm cursor-pointer ${filter === category.category ? "activeCat" : "text-gray-400"}`} onClick={() => setFilter(category.category)}>{category.category}</span>)
 						}
 
 					</div>
 				</div>
 
-				<div className="grid grid-cols-3 gap-8 mt-6">
+				<div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mt-6">
 
 					{
 						showProducts && showProducts.map(product => <Product key={product.name} name={product.name} price={product.price} image={product.image} quantity={product.qty} />)
@@ -106,6 +149,13 @@ const Homepage = () => {
 			</section>
 
 			<Newsletter />
+
+			<Link to="/cart">
+        <div className={`${scrollPosition >= 90 ? "fixed" : "hidden"} right-0 top-[47%] py-3 px-2 bg-black flex gap-2 v-center text-white transitionItem`}>
+          <BsHandbag />
+          <span className="font-medium">Cart ${total}</span>
+        </div>
+      </Link>
 
 		</main>
 	)

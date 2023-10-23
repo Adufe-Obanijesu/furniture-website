@@ -1,16 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 // firebase
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-	signInWithPopup,
-  GoogleAuthProvider,
-} from "../firebase/index";
-
-const provider = new GoogleAuthProvider();
+import { EmailAndPassword } from "../firebase/authentication/EmailAndPassword";
 
 // loader
 import { ClipLoader } from "react-spinners";
@@ -22,82 +13,64 @@ import PasswordInput from "../components/inputs/checkout/PasswordInput";
 // icons
 import { FcGoogle } from "react-icons/fc";
 
-// Notifications
-import {
-	successNotification,
-	errorNotification,
-} from "../functions";
 
-const auth = getAuth();
-
-const Signup = () => {
-
-	const navigate = useNavigate();
+const Signup2 = () => {
 
 	const [ email, setEmail ] = useState("");
 	const [ password, setPassword ] = useState("");
+    const [ username, setUsername ] = useState("");
+    const [ image, setImage ] = useState(null);
 	const [ loading, setLoading ] = useState(false);
 
-	const signupWithEP = e => {
+	const signupWithEP = async e => {
 		e.preventDefault();
 
 		setLoading(true);
 
-		if (!email || !password) {
-			errorNotification("Please fill in all fields");
-			return;
-		}
+		// if (!email || !password) {
+			
+		// 	return;
+		// }
 
-		createUserWithEmailAndPassword(auth, email, password)
-	  .then((cred) => {
-	    successNotification("Successfully signed up");
-	    navigate("/login");
-	    setLoading(false);
-	  })
-	  .catch(err => {
-	    errorNotification(err.message);
-	    setLoading(false);
-	  });
+        const createUser = await EmailAndPassword(email, password, username, image);
+        console.log(createUser);
+
+        setLoading(false);
 
 	}
 
 	const signupWithGoogle = () => {
 
-		signInWithPopup(auth, provider)
-	  .then((result) => {
-	    successNotification("Successfully signed up");
-	    navigate("/login");
-	  })
-	  .catch(err => {
-	    errorNotification(err.message);
-	  });
+		
 	}
 
 	return (
-		<main className="py-12 lg:px-32 md:px-12 px-6">
+		<main className="py-12 px-32">
 
 			<div className="">
 				<h1 className="text-3xl font-semibold text-center uppercase tracking-wide pb-6">sign up</h1>
 			</div>
 
 			<div className="h-center">
-				<div className="lg:w-1/2 md:w-2/3">
+				<div className="w-1/2">
 					<form onSubmit={signupWithEP}>
 						<EmailInput name="Email" label="Email" input={email} setInput={setEmail} />
 						<PasswordInput name="password" label="Password" input={password} setInput={setPassword} />
+                        <input type="text" onChange={e => setUsername(e.target.value)} placeholder="Username" value={username} /><br/>
+                        <input type="file" onChange={e => setImage(e.target.files[0])} />
 						<button type="submit" className="py-2 px-4 uppercase border-2 border-black text-gray-200 bg-black w-full">
 							{!loading ? (
                 <>
                   sign up
                 </>
               ) : (
-              	<div className="hv-center">
-	                <ClipLoader
-	                  size={20}
-	                  loading={loading}
-	                  color="#ffffff"
-	                />
-	              </div>
+                <div className="hv-center">
+                    <ClipLoader
+                      size={20}
+                      loading={loading}
+                      color="#ffffff"
+                    />
+                  </div>
               )}
 						</button>
 						<div className="py-4">
@@ -110,17 +83,10 @@ const Signup = () => {
 							sign up with google
 						</button>
 					</form>
-					<div className="flex justify-end mt-2">
-						<p>
-							<span>Already a user?</span>
-							{" "}
-							<Link to="/login" className="text-blue-500">Log in</Link>
-						</p>
-					</div>
 				</div>
 			</div>
 		</main>
 	)
 }
 
-export default Signup;
+export default Signup2;

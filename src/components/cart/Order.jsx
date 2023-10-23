@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 
 // context
 import { CartContext } from "../../contexts/cartContext";
@@ -9,7 +9,7 @@ import { FaTimes } from "react-icons/fa";
 
 const Order = ({ image, productName, price, qty }) => {
 
-  const { cart, dispatch } = useContext(CartContext);
+  const { dispatch } = useContext(CartContext);
 
   const deleteOrder = () => {
     let cart = JSON.parse(localStorage.getItem("furnitureCart"));
@@ -44,7 +44,7 @@ const Order = ({ image, productName, price, qty }) => {
         </div>
       </td>
       <td className="py-4 px-6 text-sm text-gray-700 font-bold">${price * qty}</td>
-	  </tr>
+    </tr>
 	)
 }
 

@@ -12,6 +12,7 @@ import {
   updateDoc,
   deleteDoc,
   orderBy,
+  getDocs,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -23,7 +24,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject, } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -65,4 +66,6 @@ export {
   updateDoc,
   deleteDoc,
   orderBy,
+  getDocs,
+  deleteObject,
 };

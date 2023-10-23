@@ -55,9 +55,9 @@ const Dashboard = () => {
           loading && <h3 className="text-2xl font-bold text-gray-700 mb-3">Fetching categories...</h3>
         }
 
-        <div className="grid grid-cols-4 gap-6 mt-8">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-6 mt-8">
           {
-            !loading && categories.length === 0 ? <h3 className="text-2xl font-bold text-gray-700">No category found</h3> : categories.map(category => <Category key={category.category} image={category.image} catName={category.category} />)
+            !loading && categories.length === 0 ? <h3 className="text-2xl font-bold text-gray-700">No category found</h3> : categories.map(category => <Category key={category.category} image={category.image} catName={category.category} id={category.id} />)
           }
         </div>
 
