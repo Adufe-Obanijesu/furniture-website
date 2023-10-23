@@ -2,7 +2,7 @@
 ##### Design inspiration credits to [Eskil](https://eskil.qodeinteractive.com/)
 
 ## __Disclaimer__
-Project is still in production
+Project is still in development
 
 ---
 
