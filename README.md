@@ -13,7 +13,7 @@ It's a beautifully crafted mini E-commerce site for furnitures.
 
 ## __Getting Started__
 This project was built using __[Vite](https://vitejs.dev/guide/)__ (for faster development), __[React.JS](https://react.dev/learn/installation)__ and __[TailwindCSS](https://tailwindcss.com/)__.
-Project also uses firebase for backend __[Firebase](https://firebase.google.com/)
+Project also uses firebase for backend __[Firebase](https://firebase.google.com/)__
 
 ### __Pages__
 * / => Homepage
