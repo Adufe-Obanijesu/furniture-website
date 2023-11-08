@@ -3,7 +3,7 @@ import { BsArrowRight } from "react-icons/bs";
 
 const Blog = ({ date, heading, image }) => {
 	return (
-		<div className="py-4 border-y border-gray-300">
+		<div id="blog" className="py-4 border-y border-gray-300">
 			<div className="grid md:grid-cols-2 gap-4">
 				<div className="v-center">
 					<div>
@@ -16,7 +16,7 @@ const Blog = ({ date, heading, image }) => {
 				</div>
 
 				<div className="order-first md:order-last">
-					<img src={`/images/blogs/${image}`} className="w-full h-full object-cover" alt="home decor" />
+					<img src={`/images/blogs/${image}`} className="w-full h-80 object-cover" alt="home decor" />
 				</div>
 			</div>
 		</div>

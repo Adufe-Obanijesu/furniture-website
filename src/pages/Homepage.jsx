@@ -108,7 +108,7 @@ const Homepage = () => {
   }, [filter, products]);
 
 	return (
-		<main className="lg:px-32 md:px-12 px-6">
+		<main className="lg:px-32 md:px-12 px-6 overflow-hidden">
 
 			<Hero />
 
@@ -119,7 +119,7 @@ const Homepage = () => {
 			</div>
 
 			{/* Products Section */}
-			<section className="py-12">
+			<section id="shop" className="py-12">
 				<div className="flex h-center w-full">
 					<div className="inline">
 						<span className={`mr-8 uppercase transitionItem hover:text-gray-600 text-sm cursor-pointer ${!filter ? "activeCat" : "text-gray-400"}`} onClick={() => setFilter("")}>All</span>

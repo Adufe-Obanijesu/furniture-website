@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link"
 
 // context
 import { CartContext } from "../contexts/cartContext";
@@ -31,14 +32,13 @@ const Navbar = ({ show, setShow }) => {
 
 			<div className="md:flex justify-between py-4 md:border-y border-gray-300">
 				
-				<h1 className="text-2xl font-medium text-center uppercase tracking-wide border-b border-gray-300 pb-2 md:pb-0"><Link to="/" onClick={() => setShow(false)}>furniture</Link></h1>
+				<h1 className="text-2xl font-medium text-center uppercase tracking-wide pb-2 md:pb-0"><Link to="/" onClick={() => setShow(false)}>furniture</Link></h1>
 
 				<div className="v-center mt-8 md:mt-0">
 					<ul className="flex flex-col items-center md:justify-start w-full md:flex-row gap-8">
 						<li><Link to="/" onClick={() => setShow(false)}>Home</Link></li>
-						<li onClick={() => setShow(false)}>Shop</li>
-						<li onClick={() => setShow(false)}>Pages</li>
-						<li onClick={() => setShow(false)}>Blog</li>
+						<li onClick={() => setShow(false)}><HashLink to="/#shop">Shop</HashLink></li>
+						<li onClick={() => setShow(false)}><HashLink to="/#blog">Blog</HashLink></li>
 						<li onClick={() => setShow(false)}><Link to="/admin">Admin</Link></li>
 					</ul>
 				</div>
