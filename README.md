@@ -11,6 +11,9 @@ It's a beautifully crafted mini E-commerce site for furnitures.
 
 ![Demo Image](./public/thumbnail.png)
 
+## __Live URL__
+__[Furniture Website](https://funny-druid-0b5ccc.netlify.app/)__
+
 ## __Getting Started__
 This project was built using __[Vite](https://vitejs.dev/guide/)__ (for faster development), __[React.JS](https://react.dev/learn/installation)__ and __[TailwindCSS](https://tailwindcss.com/)__.
 Project also uses firebase for backend __[Firebase](https://firebase.google.com/)__
